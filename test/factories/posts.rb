@@ -9,4 +9,12 @@ FactoryBot.define do
     # This reference will be create a new factory user for this post
     user
   end
+
+  factory :published_post, class: 'Post' do
+    title { Faker::Lorem.sentence }
+    content { Faker::Lorem.paragraph }
+    published { true }
+    # This reference will be create a new factory user for this post
+    user
+  end
 end

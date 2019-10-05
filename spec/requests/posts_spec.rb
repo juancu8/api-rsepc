@@ -4,12 +4,26 @@ require "byebug"
 RSpec.describe "Posts", type: :request do 
 
   describe "GET /posts" do
-    before { get '/posts' }
-
     it "should return OK" do
+      get '/posts'
       payload = JSON.parse(response.body)
       expect(payload).to be_empty
       expect(response).to have_http_status(200)
+    end
+
+    describe "Search" do
+      let!(:hi) { create(:published_post, title: 'Hi') }
+      let!(:pepe) { create(:published_post, title: 'Hi Pepe') }
+      let!(:from) { create(:published_post, title: 'Arjonilla') }
+  
+      it "should filter posts by title" do
+        get "/posts?search=Hi"
+        payload = JSON.parse(response.body)
+        expect(payload).to_not be_empty
+        expect(payload.size).to eq(2)
+        expect(payload.map{ |p| p["id"] }.sort).to eq([hi.id, pepe.id].sort)
+        expect(response).to have_http_status(200)
+      end
     end
   end
 
