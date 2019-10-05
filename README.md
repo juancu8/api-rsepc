@@ -12,6 +12,7 @@ The main goal of this project is built a *API* following *TDD* methodology princ
 - Repeat
 
 Users have posts.
+Serializer our post to provide for author information and control our json objects.
 
 #### Resources
 
@@ -26,6 +27,8 @@ Users have posts.
 - [Faker](https://github.com/faker-ruby/faker)
 
 - [Shoulda_matchers](https://github.com/thoughtbot/shoulda-matchers)
+
+- [active_model_serializers](https://github.com/rails-api/active_model_serializers)
 
 #### Comands && Requeriments
 
