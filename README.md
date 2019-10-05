@@ -45,6 +45,11 @@ Create service for search.
     bundle exec rspec
 ```
 
+- Runing specific test
+```shellscript
+    bundle exec rspec spec/requests/posts_spec.rb:line_number
+```
+
 - BDD
 
 ```shellscript
