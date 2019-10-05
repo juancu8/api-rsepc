@@ -14,6 +14,7 @@ The main goal of this project is built a *API* following *TDD* methodology princ
 Users have posts.
 Serializer our post to provide for author information and control our json objects.
 Create service for search.
+Authentication (Auth0)
 
 #### Resources
 
@@ -46,6 +47,7 @@ Create service for search.
 ```
 
 - Runing specific test
+
 ```shellscript
     bundle exec rspec spec/requests/posts_spec.rb:line_number
 ```
@@ -64,6 +66,7 @@ Create service for search.
 ```shellscript
     RAILS_ENV=test rails c
 ```
+
 ```shellscript
     FactoryBot.build(:post)
 ```
