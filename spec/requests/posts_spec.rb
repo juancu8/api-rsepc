@@ -53,7 +53,7 @@ RSpec.describe "Posts", type: :request do
       post "/posts", params: params_create_post
       payload = JSON.parse(response.body)
       expect(payload).to_not be_empty
-      expect(payload["id"]).to_not be_empty
+      expect(payload["id"]).to_not be_nil
       expect(response).to have_http_status(:created)
     end
 
@@ -75,7 +75,7 @@ RSpec.describe "Posts", type: :request do
   end
 
   describe "PUT /posts/{id}" do
-    let!(:post_element) { create(:post) }
+    let!(:article) { create(:post) }
 
     it "should update a post" do
       params_update_post = {
@@ -86,28 +86,28 @@ RSpec.describe "Posts", type: :request do
         }
       }
       # PUT HTTP
-      post "/posts/#{post_element.id}", params: params_update_post
+      put "/posts/#{article.id}", params: params_update_post
       payload = JSON.parse(response.body)
       expect(payload).to_not be_empty
-      expect(payload["id"]).to eq(post_element.id)
+      expect(payload["id"]).to eq(article.id)
       expect(response).to have_http_status(:ok)
     end
-  end
 
-  it "should return error message on invalid update params for post" do
-    params_update_post = {
-      post: {
-        title: nil,
-        content: nil,
-        published: false
+    it "should return error message on invalid update params for post" do
+      params_update_post = {
+        post: {
+          title: nil,
+          content: nil,
+          published: false
+        }
       }
-    }
-    # PUT HTTP
-    post "/posts/#{post_element.id}", params: params_update_post
-    payload = JSON.parse(response.body)
-    expect(payload).to_not be_empty
-    expect(payload["error"]).to_not be_empty
-    expect(response).to have_http_status(:unprocessable_entity)
+      # PUT HTTP
+      put "/posts/#{article.id}", params: params_update_post
+      payload = JSON.parse(response.body)
+      expect(payload).to_not be_empty
+      expect(payload["error"]).to_not be_empty
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
   end
 
 end
