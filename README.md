@@ -13,8 +13,8 @@ The main goal of this project is built a *API* following *TDD* methodology princ
 
 Users have posts.
 Serializer our post to provide for author information and control our json objects.
-Create service for search.
-Authentication (Auth0)
+Authentication (Auth token).
+Create services for search and generate token.
 
 #### Resources
 
