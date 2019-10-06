@@ -12,12 +12,16 @@ The main goal of this project is built a *API* following *TDD* methodology princ
 - Repeat
 
 Users have posts.
+
 Serializer our post to provide for author information and control our json objects.
+
 Authentication (Auth token).
+
 Create services for search and generate token.
-Make Healt point
-ActiveJob
-ActiveMailer
+
+Make Healt point.
+
+ActiveJob & ActiveMailer.
 
 #### Resources
 
