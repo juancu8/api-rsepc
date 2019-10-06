@@ -16,6 +16,8 @@ Serializer our post to provide for author information and control our json objec
 Authentication (Auth token).
 Create services for search and generate token.
 Make Healt point
+ActiveJob
+ActiveMailer
 
 #### Resources
 
