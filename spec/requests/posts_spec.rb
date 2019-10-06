@@ -40,7 +40,7 @@ RSpec.describe "Posts", type: :request do
   end
 
   describe "GET /posts/{id}" do
-    let!(:post) { create(:post) }
+    let!(:post) { create(:post, published: true) }
 
     it "should return a post" do
       get "/posts/#{post.id}"
@@ -54,79 +54,6 @@ RSpec.describe "Posts", type: :request do
       expect(payload["author"]["email"]).to eq(post.user.email)
       expect(payload["author"]["id"]).to eq(post.user.id)
       expect(response).to have_http_status(200)
-    end
-  end
-
-  describe "POST /posts" do
-    let!(:user) { create(:user) }
-
-    it "should create a post" do
-      params_create_post = {
-        post: {
-          title: "Title test",
-          content: "Content test",
-          published: false,
-          user_id: user.id
-        }
-      }
-      # POST HTTP
-      post "/posts", params: params_create_post
-      payload = JSON.parse(response.body)
-      expect(payload).to_not be_empty
-      expect(payload["id"]).to_not be_nil
-      expect(response).to have_http_status(:created)
-    end
-
-    it "should return error message on invalid post" do
-      params_create_post = {
-        post: {
-          content: "Content test",
-          published: false,
-          user_id: user.id
-        }
-      }
-      # POST HTTP
-      post "/posts", params: params_create_post
-      payload = JSON.parse(response.body)
-      expect(payload).to_not be_empty
-      expect(payload["error"]).to_not be_empty
-      expect(response).to have_http_status(:unprocessable_entity)
-    end
-  end
-
-  describe "PUT /posts/{id}" do
-    let!(:article) { create(:post) }
-
-    it "should update a post" do
-      params_update_post = {
-        post: {
-          title: "Title test",
-          content: "Content test",
-          published: true
-        }
-      }
-      # PUT HTTP
-      put "/posts/#{article.id}", params: params_update_post
-      payload = JSON.parse(response.body)
-      expect(payload).to_not be_empty
-      expect(payload["id"]).to eq(article.id)
-      expect(response).to have_http_status(:ok)
-    end
-
-    it "should return error message on invalid update params for post" do
-      params_update_post = {
-        post: {
-          title: nil,
-          content: nil,
-          published: false
-        }
-      }
-      # PUT HTTP
-      put "/posts/#{article.id}", params: params_update_post
-      payload = JSON.parse(response.body)
-      expect(payload).to_not be_empty
-      expect(payload["error"]).to_not be_empty
-      expect(response).to have_http_status(:unprocessable_entity)
     end
   end
 
