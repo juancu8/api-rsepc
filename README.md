@@ -35,6 +35,8 @@ ActiveMailer
 
 - [active_model_serializers](https://github.com/rails-api/active_model_serializers)
 
+- [letter_opener](https://github.com/ryanb/letter_opener)
+
 - If want testing can use [Postman](https://www.getpostman.com/)
 
 #### Comands && Requeriments
@@ -114,4 +116,21 @@ End points:
             "title": "Hi!"
         }
     }
+```
+
+#### Send mail with letter_opener 
+
+```shellscript
+    rails c
+```
+- Letter opener
+
+```ruby
+    PostReportMailer.post_report(user, post, report).deliver_now
+```
+
+- Send by job 
+
+```ruby
+    PostReportJob.perform_later(User.first.id, Post.first.id)
 ```
